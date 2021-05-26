@@ -1,0 +1,132 @@
+<div class="card">
+
+    <div class="card-header text-center">
+       Employee Form 
+    </div>
+  
+    <div class="card-body">
+        <form novalidate  (ngSubmit)="save()"  [formGroup]="employeeForm">
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="fullName"> Full Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="fullName" type="text"  placeholder="Full Name (required)" formControlName="fullName" 
+                           [ngClass]="{ 'is-invalid': ( employeeForm.controls.fullName.touched || employeeForm.controls.fullName.dirty) && ! employeeForm.controls.fullName.valid  }"
+                     />
+                     <span class="invalid-feedback">
+                        <span *ngIf="employeeForm.controls.fullName.errors?.required">
+                          Please enter your Full name.
+                        </span>
+                        <span *ngIf="employeeForm.controls.fullName.errors?.maxlength">
+                          The first name must be less than 150 characters.
+                        </span>
+                      </span> 
+                  </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="address">Address</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="address"
+                         type="text"
+                         placeholder="Address (required)"
+                         formControlName="address"
+                         [ngClass]="{'is-invalid': (employeeForm.controls.address.touched || employeeForm.controls.address.dirty) && ! employeeForm.controls.address.valid }"
+                         />
+                  
+                   <span class="invalid-feedback">
+                     <span *ngIf="employeeForm.controls.address.errors?.required">
+                      Please enter your adress .
+                    </span> 
+                    <span *ngIf="employeeForm.controls.address.errors?.maxlength">
+                      The address must be less than 150 characters.
+                    </span> 
+                  </span> 
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="phoneNumber">Phone Number</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="phoneNumber"
+                         type="text"
+                         placeholder="Phone Number (required)"
+                         formControlName="phoneNumber"
+                         [ngClass]="{'is-invalid': (employeeForm.controls.phoneNumber.touched || employeeForm.controls.phoneNumber.dirty) && ! employeeForm.controls.phoneNumber.valid }"
+                         
+                         />
+                  <span class="invalid-feedback">
+                    <span *ngIf="employeeForm.controls.phoneNumber.errors?.required">
+                      Please enter your Phone Number.
+                    </span>
+                    <span *ngIf="employeeForm.controls.phoneNumber.errors?.maxlength">
+                      The Phone Number must be less than 50 characters.
+                    </span>
+                  </span>
+      
+                </div>
+            </div>
+
+         <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="positionId">Position</label>
+
+            <div class="col-md-8">
+            
+            <select required id="positionId" name="positionId" formControlName="positionId"  class="form-control" [(ngModel)]="positionSelected"
+                    [ngClass]="{'is-invalid': employeeForm.controls.touched && employeeForm.controls.positionId.invalid }"  
+                     >
+                    <option  [value]="item.positionId" *ngFor="let item of positions" >
+                        {{ item.positionName}}
+                    </option>
+            </select>
+
+              <span class="invalid-feedback">
+                <span *ngIf="employeeForm.controls.positionId.touched && employeeForm.controls.positionId.invalid">
+                  Position is required .
+                </span>
+              </span>
+            </div>
+
+         </div>
+   
+
+         <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+              <button class="btn btn-primary mr-3"
+                      type="submit"
+                      style="width:80px"
+                      [title]="employeeForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                      [disabled]="!employeeForm.valid"
+                      *ngIf=" positions.length > 0 "
+                      >
+                Save
+              </button>
+           
+            </div>
+  
+         </div>
+
+
+         <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+             <span class="text-success"> {{ successMessage }} </span>
+             <span class="text-danger"> {{ failedMessage }} </span>
+            </div>
+         </div>
+
+
+        </form>
+    </div>
+ 
+  </div>
+
+
+  <!-- <br>Dirty: {{ employeeForm.dirty }}
+  <br>Touched: {{ employeeForm.touched }}
+  <br>Valid: {{ employeeForm.valid }}
+  <br>Value: {{ employeeForm.value | json }} -->

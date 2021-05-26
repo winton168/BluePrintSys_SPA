@@ -1,0 +1,24 @@
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <th> Full Name </th>
+        <th> Address  </th>
+        <th> Phone Number </th>
+        <th> Position </th>
+        <th colspan="2"> Position </th>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let item of employeeList">
+            <td> {{ item.fullName }}</td>
+            <td> {{ item.address }}</td>
+            <td> {{ item.phoneNumber }}</td>
+            <td> {{ item.positionName }}</td>
+            <td> <i class="fa fa-edit"   (click)="EditEmployee(item)" > </i> </td>
+            <td> <i class="fa fa-trash" (click)="DeleteEmployee(item)" > </i></td>
+        </tr>
+
+
+    </tbody>
+</table>
